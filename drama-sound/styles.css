@@ -1,0 +1,303 @@
+  :root {
+    --desk: #2b2d31;
+    --strip: #38393d;
+    --strip-dark: #2f3034;
+    --accent: #e6b800;
+    --accent-dim: #8a6d00;
+    --text: #d8d8d8;
+    --text-dim: #8a8a8f;
+    --led-off: #3a0d0d;
+    --led-on: #ff3b3b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #17181a;
+    color: var(--text);
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px 60px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 4px;
+  }
+
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+  }
+
+  .desk {
+    background: var(--desk);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 0 1px #1a1b1d;
+    display: flex;
+    gap: 8px;
+  }
+
+  .strips {
+    display: flex;
+    gap: 8px;
+  }
+
+  .strip {
+    background: linear-gradient(180deg, var(--strip), var(--strip-dark));
+    border-radius: 6px;
+    width: 92px;
+    padding: 10px 8px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0 0 0 1px #1f2022;
+  }
+
+  .strip.master {
+    width: 110px;
+    background: linear-gradient(180deg, #403424, #2f2a1e);
+    box-shadow: inset 0 0 0 1px #4a3a1a;
+  }
+
+  .ch-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .strip.master .ch-name { color: var(--accent); }
+
+  .track-label {
+    width: 100%;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 3px 2px;
+    border-radius: 3px;
+    background: #1f2022;
+    box-shadow: inset 0 0 0 1px #2a2b2f;
+  }
+
+  .track-label.loaded { color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent-dim); }
+  .track-label.missing { color: #ff6b6b; }
+
+  .transport {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 7px;
+    cursor: pointer;
+    background: #4a4b50;
+    color: var(--text);
+    box-shadow: 0 1px 0 #1a1b1d, inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .btn:hover { background: #55565c; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn.play.active {
+    background: #1f7a3d;
+    color: #e8ffe8;
+  }
+
+  .btn.mute {
+    width: 100%;
+    margin-bottom: 10px;
+    background: #4a1f1f;
+  }
+
+  .btn.mute::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--led-off);
+    margin-right: 5px;
+    vertical-align: middle;
+    box-shadow: inset 0 0 1px #000;
+  }
+
+  .btn.mute.active {
+    background: #7a1f1f;
+  }
+
+  .btn.mute.active::before {
+    background: var(--led-on);
+    box-shadow: 0 0 6px var(--led-on);
+  }
+
+  .fader-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    height: 220px;
+    width: 100%;
+  }
+
+  .fader-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .fader-track {
+    position: relative;
+    width: 40px;
+    height: 170px;
+    flex-shrink: 0;
+    cursor: pointer;
+    touch-action: none;
+  }
+
+  .fader-track::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    transform: translateX(-50%);
+    background: #17181a;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 1px #000;
+  }
+
+  .scale {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  .scale span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #4a4b4f;
+    position: relative;
+  }
+
+  .fader-fill {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 6px;
+    height: 0%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--accent-dim), #5a4700);
+    pointer-events: none;
+  }
+
+  .strip.master .fader-fill {
+    background: linear-gradient(180deg, #ffd966, #c99c00);
+  }
+
+  .fader-thumb {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    width: 30px;
+    height: 16px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, #e9e9e9, #a8a8a8);
+    border: 1px solid #555;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .fader-thumb:active { cursor: grabbing; }
+
+  .fader-thumb:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .strip.master .fader-thumb {
+    background: linear-gradient(180deg, #ffd966, #c99c00);
+    border-color: #6b5400;
+  }
+
+  .db-readout {
+    margin-top: 10px;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .meter {
+    width: 8px;
+    height: 170px;
+    background: #0e0f10;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px #000;
+    position: relative;
+    margin-left: 6px;
+  }
+
+  .meter-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(180deg, #ff4d4d 0%, #ffd24d 15%, #4dff6b 40%);
+  }
+
+  .global-bar {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+  }
+
+  footer {
+    margin-top: 16px;
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    text-align: center;
+    max-width: 520px;
+  }
+
+  footer code {
+    background: #1f2022;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
