@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mix Desk</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Poseidon Showcase</h1>
+<div class="subtitle">MixDesk</div>
+
+<div class="desk">
+  <div class="strips" id="strips"></div>
+  <div class="strip master" id="master-strip">
+    <div class="ch-name">MASTER</div>
+    <div class="track-label" style="visibility:hidden;">spacer</div>
+    <div class="transport">
+      <button class="btn" id="play-all">Play All</button>
+      <button class="btn" id="stop-all">Stop</button>
+    </div>
+    <button class="btn mute" id="master-mute">MUTE</button>
+    <div class="fader-area">
+      <div class="fader-row">
+        <div class="fader-track" id="master-fader-track">
+          <div class="scale">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="fader-fill" id="master-fader-fill"></div>
+          <div class="fader-thumb" id="master-fader-thumb"></div>
+        </div>
+        <div class="meter"><div class="meter-fill" id="master-meter"></div></div>
+      </div>
+      <div class="db-readout" id="master-db">0.0 dB</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
