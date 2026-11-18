@@ -3,7 +3,7 @@
 
   const CHANNEL_COUNT = 10;
   const UNITY = 80; // fader position that equals 0 dB
-  const COLORS = ['#a78bfa', '#f472b6', '#60a5fa', '#34d399', '#fbbf24'];
+  const COLORS = ['#facc15', '#fde047', '#f59e0b', '#fb923c', '#fff7ae'];
   const MIX_KEY = 'mixdesk.mix.v1';
   const SCENE_KEY = 'mixdesk.scenes.v1';
 
@@ -744,8 +744,8 @@
     const usable = freq.length * 0.55;
     let any = 0;
     const bg = g.createLinearGradient(0, 0, W, 0);
-    bg.addColorStop(0, '#a78bfa');
-    bg.addColorStop(1, '#f472b6');
+    bg.addColorStop(0, '#facc15');
+    bg.addColorStop(1, '#f59e0b');
     g.fillStyle = bg;
     for (let i = 0; i < bars; i++) {
       let v = 0;
