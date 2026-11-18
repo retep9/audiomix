@@ -3,7 +3,7 @@
 
   const CHANNEL_COUNT = 10;
   const UNITY = 80; // fader position that equals 0 dB
-  const COLORS = ['#d4a94f', '#ef6a4c', '#7fe0bd', '#6ab7e6', '#b9a3e8'];
+  const COLORS = ['#a78bfa', '#f472b6', '#60a5fa', '#34d399', '#fbbf24'];
   const MIX_KEY = 'mixdesk.mix.v1';
   const SCENE_KEY = 'mixdesk.scenes.v1';
 
@@ -737,43 +737,29 @@
   function drawWave(active) {
     if (!active && waveFlat) return;
     g.clearRect(0, 0, W, H);
-    const points = 64;
-    const ys = [];
     if (active) analyserMix.getByteFrequencyData(freq);
+    const bars = 30;
+    const gap = 1;
+    const bw = (W - gap * (bars - 1)) / bars;
     const usable = freq.length * 0.55;
     let any = 0;
-    for (let i = 0; i < points; i++) {
+    const bg = g.createLinearGradient(0, 0, W, 0);
+    bg.addColorStop(0, '#a78bfa');
+    bg.addColorStop(1, '#f472b6');
+    g.fillStyle = bg;
+    for (let i = 0; i < bars; i++) {
       let v = 0;
       if (active) {
-        const a = Math.floor(Math.pow(i / points, 1.7) * usable);
-        const b = Math.max(a + 1, Math.floor(Math.pow((i + 1) / points, 1.7) * usable));
+        const a = Math.floor(Math.pow(i / bars, 1.7) * usable);
+        const e = Math.max(a + 1, Math.floor(Math.pow((i + 1) / bars, 1.7) * usable));
         let sum = 0;
-        for (let k = a; k < b; k++) sum += freq[k];
-        v = sum / (b - a) / 255;
+        for (let k = a; k < e; k++) sum += freq[k];
+        v = sum / (e - a) / 255;
       }
       any += v;
-      ys.push(H - 3 - Math.pow(v, 1.3) * (H - 14) * 0.5);
+      const h = Math.max(1, Math.round(v * (H - 4)));
+      g.fillRect(i * (bw + gap), H - h, bw, h);
     }
-    const step = W / (points - 1);
-    g.beginPath();
-    g.moveTo(0, ys[0]);
-    for (let i = 1; i < points; i++) {
-      const x0 = (i - 1) * step;
-      const x1 = i * step;
-      g.quadraticCurveTo(x0, ys[i - 1], (x0 + x1) / 2, (ys[i - 1] + ys[i]) / 2);
-    }
-    g.lineTo(W, ys[points - 1]);
-    g.strokeStyle = 'rgba(127, 224, 189, 0.85)';
-    g.lineWidth = 1.6;
-    g.stroke();
-    g.lineTo(W, H);
-    g.lineTo(0, H);
-    g.closePath();
-    const grad = g.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, 'rgba(127, 224, 189, 0.34)');
-    grad.addColorStop(1, 'rgba(127, 224, 189, 0)');
-    g.fillStyle = grad;
-    g.fill();
     waveFlat = any === 0;
   }
 

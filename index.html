@@ -3,37 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071e26">
+<meta name="theme-color" content="#0a0a0f">
 <title>MixDesk - Poseidon Showcase</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071e26'/%3E%3Cpath d='M6 20c3-8 5-8 8 0s5 8 8 0 3-4 4-4' fill='none' stroke='%237fe0bd' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b1d20'/%3E%3Crect x='6' y='6' width='4' height='20' fill='%23c4c8cc'/%3E%3Crect x='14' y='6' width='4' height='20' fill='%23c4c8cc'/%3E%3Crect x='22' y='6' width='4' height='20' fill='%23c4c8cc'/%3E%3Crect x='4' y='10' width='8' height='5' fill='%23fff'/%3E%3Crect x='12' y='17' width='8' height='5' fill='%23fff'/%3E%3Crect x='20' y='8' width='8' height='5' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip" href="#desk">Skip to mixer</a>
 
-<header class="top">
-  <canvas id="wave" aria-hidden="true"></canvas>
-  <div class="top-inner">
-    <div class="heading">
-      <h1>Poseidon Showcase</h1>
-      <p class="sub">MixDesk has ten channels and one master. Set the balance, then press Space.</p>
-    </div>
-    <div class="transport" role="group" aria-label="Transport">
-      <button type="button" id="play-all" class="tbtn primary"><span class="ico" id="play-all-ico"></span><span id="play-all-label">Play all</span></button>
-      <button type="button" id="stop-all" class="tbtn"><span class="ico" id="stop-all-ico"></span>Stop</button>
-      <button type="button" id="loop" class="tbtn" aria-pressed="false"><span class="ico" id="loop-ico"></span>Loop</button>
-      <output id="time" class="lcd" aria-label="Position">0:00 / 0:00</output>
-      <input id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek all channels">
-    </div>
+<div class="blob b1" aria-hidden="true"></div>
+<div class="blob b2" aria-hidden="true"></div>
+<div class="blob b3" aria-hidden="true"></div>
+
+<header class="hero">
+  <span class="badge">&#10024; MixDesk Studio</span>
+  <h1>Poseidon <span class="grad">Showcase</span> &#127911;</h1>
+  <p class="tag">Craft your perfect mix with a beautiful, intuitive studio experience. Blend ten channels, shape the sound and let the vibes flow.</p>
+  <div class="transport glass" role="group" aria-label="Transport">
+    <button type="button" id="play-all" class="tbtn primary"><span class="ico" id="play-all-ico"></span><span id="play-all-label">Play all</span></button>
+    <button type="button" id="stop-all" class="tbtn"><span class="ico" id="stop-all-ico"></span>Stop</button>
+    <button type="button" id="loop" class="tbtn" aria-pressed="false"><span class="ico" id="loop-ico"></span>Loop</button>
+    <output id="time" class="lcd" aria-label="Position">0:00 / 0:00</output>
+    <canvas id="wave" width="150" height="32" aria-hidden="true"></canvas>
+    <input id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek all channels">
   </div>
 </header>
 
 <main>
   <div class="desk-scroll" id="desk" tabindex="-1">
-    <div class="desk">
+    <div class="desk glass">
       <div class="strips" id="strips"></div>
       <div id="master-slot"></div>
     </div>
@@ -41,19 +42,21 @@
 
   <section class="tools" aria-label="Mix tools">
     <div class="tool-group" role="group" aria-label="Scenes">
-      <span class="group-label">Scenes</span>
+      <span class="group-label">&#127916; Scenes</span>
       <button type="button" id="store" class="tbtn small" aria-pressed="false" title="Press Store, then a scene letter, to save the current mix">Store</button>
       <button type="button" class="tbtn small scene" data-scene="0" aria-label="Scene A">A</button>
       <button type="button" class="tbtn small scene" data-scene="1" aria-label="Scene B">B</button>
       <button type="button" class="tbtn small scene" data-scene="2" aria-label="Scene C">C</button>
     </div>
     <div class="tool-group">
-      <button type="button" id="reset" class="tbtn small">Reset mix</button>
-      <button type="button" id="share" class="tbtn small">Copy mix link</button>
-      <button type="button" id="help-btn" class="tbtn small">Shortcuts</button>
+      <button type="button" id="reset" class="tbtn small">&#128260; Reset mix</button>
+      <button type="button" id="share" class="tbtn small">&#128279; Copy mix link</button>
+      <button type="button" id="help-btn" class="tbtn small">&#9000;&#65039; Shortcuts</button>
     </div>
   </section>
 </main>
+
+<footer class="foot">Made with &#10084;&#65039; and a lot of &#9749;</footer>
 
 <dialog id="help" aria-labelledby="help-title">
   <h2 id="help-title">Keyboard shortcuts</h2>
