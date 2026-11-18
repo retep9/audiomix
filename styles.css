@@ -4,10 +4,10 @@
     --strip-dark: #2f3034;
     --accent: #2600e6;
     --accent-dim: #00678a;
-    --text: #d8d8d8;
+    --text: #dc4d01;
     --text-dim: #a8a8f1;
     --led-off: #0d3a29;
-    --led-on: #3bff6f;
+    --led-on: #dc4d01;
   }
 
   * { box-sizing: border-box; }
