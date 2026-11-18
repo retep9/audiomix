@@ -2,12 +2,12 @@
     --desk: #2b2d31;
     --strip: #38393d;
     --strip-dark: #2f3034;
-    --accent: #e6b800;
-    --accent-dim: #8a6d00;
+    --accent: #2600e6;
+    --accent-dim: #00678a;
     --text: #d8d8d8;
-    --text-dim: #8a8a8f;
-    --led-off: #3a0d0d;
-    --led-on: #ff3b3b;
+    --text-dim: #a8a8f1;
+    --led-off: #0d3a29;
+    --led-on: #3bff6f;
   }
 
   * { box-sizing: border-box; }
