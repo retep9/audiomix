@@ -1,45 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mix Desk</title>
+<meta name="theme-color" content="#071e26">
+<title>MixDesk - Poseidon Showcase</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071e26'/%3E%3Cpath d='M6 20c3-8 5-8 8 0s5 8 8 0 3-4 4-4' fill='none' stroke='%237fe0bd' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skip" href="#desk">Skip to mixer</a>
 
-<h1>Poseidon Showcase</h1>
-<div class="subtitle">MixDesk</div>
-
-<div class="desk">
-  <div class="strips" id="strips"></div>
-  <div class="strip master" id="master-strip">
-    <div class="ch-name">MASTER</div>
-    <div class="track-label" style="visibility:hidden;">spacer</div>
-    <div class="transport">
-      <button class="btn" id="play-all">Play All</button>
-      <button class="btn" id="stop-all">Stop</button>
+<header class="top">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="top-inner">
+    <div class="heading">
+      <h1>Poseidon Showcase</h1>
+      <p class="sub">MixDesk has ten channels and one master. Set the balance, then press Space.</p>
     </div>
-    <button class="btn mute" id="master-mute">MUTE</button>
-    <div class="fader-area">
-      <div class="fader-row">
-        <div class="fader-track" id="master-fader-track">
-          <div class="scale">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <div class="fader-fill" id="master-fader-fill"></div>
-          <div class="fader-thumb" id="master-fader-thumb"></div>
-        </div>
-        <div class="meter"><div class="meter-fill" id="master-meter"></div></div>
-      </div>
-      <div class="db-readout" id="master-db">0.0 dB</div>
+    <div class="transport" role="group" aria-label="Transport">
+      <button type="button" id="play-all" class="tbtn primary"><span class="ico" id="play-all-ico"></span><span id="play-all-label">Play all</span></button>
+      <button type="button" id="stop-all" class="tbtn"><span class="ico" id="stop-all-ico"></span>Stop</button>
+      <button type="button" id="loop" class="tbtn" aria-pressed="false"><span class="ico" id="loop-ico"></span>Loop</button>
+      <output id="time" class="lcd" aria-label="Position">0:00 / 0:00</output>
+      <input id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek all channels">
     </div>
   </div>
-</div>
+</header>
 
-<footer>
-</footer>
+<main>
+  <div class="desk-scroll" id="desk" tabindex="-1">
+    <div class="desk">
+      <div class="strips" id="strips"></div>
+      <div id="master-slot"></div>
+    </div>
+  </div>
+
+  <section class="tools" aria-label="Mix tools">
+    <div class="tool-group" role="group" aria-label="Scenes">
+      <span class="group-label">Scenes</span>
+      <button type="button" id="store" class="tbtn small" aria-pressed="false" title="Press Store, then a scene letter, to save the current mix">Store</button>
+      <button type="button" class="tbtn small scene" data-scene="0" aria-label="Scene A">A</button>
+      <button type="button" class="tbtn small scene" data-scene="1" aria-label="Scene B">B</button>
+      <button type="button" class="tbtn small scene" data-scene="2" aria-label="Scene C">C</button>
+    </div>
+    <div class="tool-group">
+      <button type="button" id="reset" class="tbtn small">Reset mix</button>
+      <button type="button" id="share" class="tbtn small">Copy mix link</button>
+      <button type="button" id="help-btn" class="tbtn small">Shortcuts</button>
+    </div>
+  </section>
+</main>
+
+<dialog id="help" aria-labelledby="help-title">
+  <h2 id="help-title">Keyboard shortcuts</h2>
+  <dl class="keys">
+    <dt><kbd>Space</kbd></dt><dd>Play or pause all channels</dd>
+    <dt><kbd>Home</kbd></dt><dd>Stop and rewind</dd>
+    <dt><kbd>L</kbd></dt><dd>Turn loop on or off</dd>
+    <dt><kbd>1</kbd> to <kbd>9</kbd>, <kbd>0</kbd></dt><dd>Select channel 1 to 10</dd>
+    <dt><kbd>&larr;</kbd> <kbd>&rarr;</kbd></dt><dd>Move the selection</dd>
+    <dt><kbd>&uarr;</kbd> <kbd>&darr;</kbd></dt><dd>Move the selected fader (hold Shift for bigger steps)</dd>
+    <dt><kbd>M</kbd></dt><dd>Mute the selected channel</dd>
+    <dt><kbd>S</kbd></dt><dd>Solo the selected channel</dd>
+    <dt><kbd>Shift</kbd> + <kbd>S</kbd></dt><dd>Clear all solos</dd>
+    <dt><kbd>?</kbd></dt><dd>Show this list</dd>
+  </dl>
+  <p class="hint">Double-click a fader or pan knob to reset it. Click a channel's coloured bar to change its colour, or click its name to rename it.</p>
+  <form method="dialog"><button class="tbtn primary" autofocus>Close</button></form>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script src="script.js"></script>
 </body>
