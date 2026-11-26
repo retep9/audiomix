@@ -1,6 +1,6 @@
 
 (function () {
-  const CHANNEL_COUNT = 10;
+  const CHANNEL_COUNT = 12;
   const stripsEl = document.getElementById('strips');
 
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
